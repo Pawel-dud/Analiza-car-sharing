@@ -1,7 +1,8 @@
 name: Collect car
 on:
   schedule:
-    - cron: "*/20 * * * *"
+    - cron: "*/15 * * * *"
+
   workflow_dispatch:
 
 jobs:
@@ -25,12 +26,12 @@ jobs:
       - name: Pobieranie danych o samochodach
         run: python collect.py
 
-      - name: Zapis bazy danych
+      - name: Zapis danych o samochodach
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
           git add database.db
-          git commit -m "Aktualizacja bazy danych"  || echo "Brak zmian"
+          git commit -m "Aktualizacja danych o samochodach"  || echo "Brak zmian"
 
           git push
