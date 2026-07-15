@@ -1,0 +1,36 @@
+name: Collect car
+on:
+  schedule:
+    - cron: "/20 * * * *"
+    workflow_dispatch:
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    perrmissions:
+      contents: write
+
+    steps:
+      - name: Pobranie repozytorium
+        uses: actions/checkout@v4
+
+      - name: Instalacja Pythona
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalacja bibliotek
+        run: pip install -r requirements.txt
+
+      - name: Pobieranie danych o samochodach
+        run: python collect.py
+
+      - name: Zapis bazy danych
+        run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "fithyb-actions@github.com"
+
+        git add database.db
+        git commit -m "Aktualizacja bazy danych"  || echo "Brak zmian"
+
+        git push
