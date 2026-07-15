@@ -1,9 +1,9 @@
-name Update information data
+name: Update information data
 
 on:
   schedule:
     - cron: "0 3 * * *"
-    
+
   workflow_dispatch:
 
 jobs:

@@ -7,7 +7,7 @@ on:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    perrmissions:
+    permissions:
       contents: write
 
     steps:
@@ -27,10 +27,10 @@ jobs:
 
       - name: Zapis bazy danych
         run: |
-            git config --global user.name "github-actions"
-            git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
 
-        git add database.db
-        git commit -m "Aktualizacja bazy danych"  || echo "Brak zmian"
+          git add database.db
+          git commit -m "Aktualizacja bazy danych"  || echo "Brak zmian"
 
-        git push
+          git push
